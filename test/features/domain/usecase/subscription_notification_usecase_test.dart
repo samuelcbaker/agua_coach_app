@@ -1,5 +1,8 @@
+import 'package:agua_coach_app/core/usecase/errors/failures.dart';
+import 'package:agua_coach_app/core/usecase/usecase.dart';
 import 'package:agua_coach_app/features/domain/repositories/notification_repository.dart';
 import 'package:agua_coach_app/features/domain/usecase/subscribe_notification_usecase.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -16,7 +19,17 @@ void main() {
         notificationRepository: notificationRepository);
   });
 
+  final subscribeNotificationParamsMock = SubscribeNotificationParams(
+    token: 'token',
+  );
+
   test('should subscribe notification', () {
-    // expect(actual, matcher)
+    when(() => notificationRepository.subscribeNotification(token: any()))
+        .thenAnswer((_) async => Right<Failure, void>(null));
+
+    expect(
+      () => usecase(subscribeNotificationParamsMock),
+      Right<Failure, void>(null),
+    );
   });
 }
