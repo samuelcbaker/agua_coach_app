@@ -1,0 +1,11 @@
+{
+  "dart.lineLength": 120,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "dart.allowTestsOutsideTestFolder": true,
+  "workbench.colorCustomizations": {
+    "titleBar.activeBackground": "#20a7a0",
+    "titleBar.inactiveBackground": "#20a7a0",
+    "titleBar.activeForeground": "#ffffff",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+}
