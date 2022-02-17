@@ -8,11 +8,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
-class MockDbClient extends Mock implements DbClient {}
+class MockDbClient extends Mock implements IDbClient {}
 
 void main() {
   late INotificationDatasource datasource;
-  late DbClient dbClient;
+  late IDbClient dbClient;
 
   setUp(() {
     dbClient = MockDbClient();

@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const SUBSCRIBE_NOTIFICATION_KEY = 'SUBSCRIBE_NOTIFICATION_KEY';
 
 class NotificationDatasourceImpl implements INotificationDatasource {
-  final DbClient dbClient;
+  final IDbClient dbClient;
 
   NotificationDatasourceImpl({required this.dbClient});
 
