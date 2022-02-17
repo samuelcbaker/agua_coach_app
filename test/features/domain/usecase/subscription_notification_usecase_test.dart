@@ -24,19 +24,23 @@ void main() {
     return;
   }
 
-  final subscribeFailure = SetSubscriptionNotificationFailure();
+  final subscribeFailure = SaveOnSharedPreferencesFailure();
 
   test(
     'should subscribe notification',
     () async {
-      when(() => notificationRepository.setSubscriptionNotification(true))
+      when(() => notificationRepository.setSubscriptionNotification(subscribe: true))
           .thenAnswer((_) async => Right(mockVoidReturn));
 
       final result = await usecase(mockSetSubscriptionNotificationParams);
 
-      expect(result, Right<Failure, void>(mockVoidReturn));
+      expect(
+        result,
+        Right<Failure, void>(mockVoidReturn),
+      );
+
       verify(
-        () => notificationRepository.setSubscriptionNotification(true),
+        () => notificationRepository.setSubscriptionNotification(subscribe: true),
       ).called(1);
     },
   );
@@ -44,7 +48,7 @@ void main() {
   test(
     'should return SetSubscriptionNotificationFailure if repository error',
     () async {
-      when(() => notificationRepository.setSubscriptionNotification(any()))
+      when(() => notificationRepository.setSubscriptionNotification(subscribe: true))
           .thenAnswer((_) async => Left(subscribeFailure));
 
       final result = await usecase(mockSetSubscriptionNotificationParams);
@@ -54,7 +58,7 @@ void main() {
         Left<Failure, void>(subscribeFailure),
       );
       verify(
-        () => notificationRepository.setSubscriptionNotification(any()),
+        () => notificationRepository.setSubscriptionNotification(subscribe: true),
       ).called(1);
     },
   );

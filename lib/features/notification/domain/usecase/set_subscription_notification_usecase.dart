@@ -2,6 +2,7 @@ import 'package:agua_coach_app/core/usecase/errors/failures.dart';
 import 'package:agua_coach_app/core/usecase/usecase.dart';
 import 'package:agua_coach_app/features/notification/domain/repositories/notification_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:equatable/equatable.dart';
 
 class SetSubscriptionNotificationUsecase extends Usecase<void, SetSubscriptionNotificationParams> {
   final INotificationRepository notificationRepository;
@@ -10,12 +11,17 @@ class SetSubscriptionNotificationUsecase extends Usecase<void, SetSubscriptionNo
 
   @override
   Future<Either<Failure, void>> call(SetSubscriptionNotificationParams params) async {
-    return notificationRepository.setSubscriptionNotification(params.subscribe);
+    return notificationRepository.setSubscriptionNotification(subscribe: params.subscribe);
   }
 }
 
-class SetSubscriptionNotificationParams {
+class SetSubscriptionNotificationParams extends Equatable {
   final bool subscribe;
 
-  SetSubscriptionNotificationParams({required this.subscribe});
+  const SetSubscriptionNotificationParams({
+    required this.subscribe,
+  });
+
+  @override
+  List<Object?> get props => [subscribe];
 }
