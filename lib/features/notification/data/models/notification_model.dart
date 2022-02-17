@@ -1,26 +1,25 @@
 import 'package:agua_coach_app/features/notification/domain/entities/notification_entity.dart';
-import 'package:flutter/material.dart';
 
 class NotificationModel extends NotificationEntity {
   const NotificationModel({
     required String title,
     required String description,
-    required IconData icon,
+    required String iconURL,
   }) : super(
           title: title,
           description: description,
-          icon: icon,
+          iconURL: iconURL,
         );
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) => NotificationModel(
         title: json['title'],
         description: json['description'],
-        icon: IconData(json['icon']),
+        iconURL: json['iconURL'],
       );
 
   Map<String, dynamic> toJson() => {
         'title': title,
         'description': description,
-        'icon': icon.fontPackage,
+        'iconURL': iconURL,
       };
 }
