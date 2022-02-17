@@ -1,4 +1,4 @@
-import 'package:agua_coach_app/features/notification/domain/entities/notification_entity.dart';
+import 'package:agua_coach_app/features/domain/entities/notification_entity.dart';
 
 class NotificationModel extends NotificationEntity {
   const NotificationModel({

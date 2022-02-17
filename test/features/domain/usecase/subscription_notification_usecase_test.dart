@@ -1,6 +1,6 @@
 import 'package:agua_coach_app/core/usecase/errors/failures.dart';
-import 'package:agua_coach_app/features/notification/domain/repositories/notification_repository.dart';
-import 'package:agua_coach_app/features/notification/domain/usecase/set_subscription_notification_usecase.dart';
+import 'package:agua_coach_app/features/domain/repositories/notification_repository.dart';
+import 'package:agua_coach_app/features/domain/usecase/set_subscription_notification_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

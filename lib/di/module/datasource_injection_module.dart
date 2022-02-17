@@ -5,8 +5,8 @@ import 'dart:async';
 
 import 'package:agua_coach_app/di/injection_module.dart';
 import 'package:agua_coach_app/di/injector.dart';
-import 'package:agua_coach_app/features/notification/data/datasources/notification_datasource.dart';
-import 'package:agua_coach_app/features/notification/data/datasources/notification_datasource_impl.dart';
+import 'package:agua_coach_app/features/data/datasources/notification_datasource.dart';
+import 'package:agua_coach_app/features/data/datasources/notification_datasource_impl.dart';
 
 class DatasourceInjectionModule implements InjectionModule {
   @override

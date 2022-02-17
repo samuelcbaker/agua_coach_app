@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:agua_coach_app/features/notification/data/models/notification_model.dart';
-import 'package:agua_coach_app/features/notification/domain/entities/notification_entity.dart';
+import 'package:agua_coach_app/features/data/models/notification_model.dart';
+import 'package:agua_coach_app/features/domain/entities/notification_entity.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../../../../mocks/mocks.dart';
+import '../../../mocks/mocks.dart';
 
 void main() {
   const notificationModelMock = NotificationModel(
