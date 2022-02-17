@@ -24,7 +24,7 @@ void main() {
     return;
   }
 
-  final subscribeFailure = SaveOnSharedPreferencesFailure();
+  final subscribeFailure = SaveOnDbFailure();
 
   test(
     'should subscribe notification',

@@ -14,8 +14,8 @@ class NotificationRepositoryImpl implements INotificationRepository {
     try {
       final result = await datasource.setSubscriptionNotification(subscribe: subscribe);
       return Right(result);
-    } on SaveOnSharedPreferencesException {
-      return Left(SaveOnSharedPreferencesFailure());
+    } on SaveOnDbException {
+      return Left(SaveOnDbFailure());
     }
   }
 }

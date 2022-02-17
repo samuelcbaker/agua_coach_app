@@ -51,14 +51,14 @@ void main() {
       when(
         () => datasource.setSubscriptionNotification(subscribe: true),
       ).thenThrow(
-        SaveOnSharedPreferencesException(),
+        SaveOnDbException(),
       );
 
       final result = await repository.setSubscriptionNotification(subscribe: true);
 
       expect(
         result,
-        Left<Failure, void>(SaveOnSharedPreferencesFailure()),
+        Left<Failure, void>(SaveOnDbFailure()),
       );
 
       verify(
