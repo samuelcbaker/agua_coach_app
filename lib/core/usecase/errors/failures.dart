@@ -1,5 +1,3 @@
-abstract class Failure {
-  final String description;
+abstract class Failure {}
 
-  Failure({required this.description});
-}
+class SubscribeNotificationFailure implements Failure {}

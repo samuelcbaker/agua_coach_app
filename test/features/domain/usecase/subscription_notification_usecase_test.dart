@@ -1,7 +1,7 @@
 import 'package:agua_coach_app/core/usecase/errors/failures.dart';
 import 'package:agua_coach_app/core/usecase/usecase.dart';
-import 'package:agua_coach_app/features/domain/repositories/notification_repository.dart';
-import 'package:agua_coach_app/features/domain/usecase/subscribe_notification_usecase.dart';
+import 'package:agua_coach_app/features/notification/domain/repositories/notification_repository.dart';
+import 'package:agua_coach_app/features/notification/domain/usecase/subscribe_notification_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -19,17 +19,37 @@ void main() {
         notificationRepository: notificationRepository);
   });
 
-  final subscribeNotificationParamsMock = SubscribeNotificationParams(
-    token: 'token',
+  test(
+    'should subscribe notification',
+    () async {
+      when(() => notificationRepository.subscribeNotification())
+          .thenAnswer((_) async => const Right(null));
+
+      await usecase(NoParams());
+
+      verify(
+        () => notificationRepository.subscribeNotification(),
+      ).called(1);
+    },
   );
 
-  test('should subscribe notification', () {
-    when(() => notificationRepository.subscribeNotification(token: any()))
-        .thenAnswer((_) async => Right<Failure, void>(null));
+  final subscribeFailure = SubscribeNotificationFailure();
 
-    expect(
-      () => usecase(subscribeNotificationParamsMock),
-      Right<Failure, void>(null),
-    );
-  });
+  test(
+    'should return SubscribeNotificationFailure if repository error',
+    () async {
+      when(() => notificationRepository.subscribeNotification())
+          .thenAnswer((_) async => Left<Failure, void>(subscribeFailure));
+
+      final result = await usecase(NoParams());
+
+      expect(
+        result,
+        Left<Failure, void>(subscribeFailure),
+      );
+      verify(
+        () => notificationRepository.subscribeNotification(),
+      ).called(1);
+    },
+  );
 }
