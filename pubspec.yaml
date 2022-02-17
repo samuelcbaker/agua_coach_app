@@ -17,6 +17,7 @@ dependencies:
   equatable: ^2.0.3
   shared_preferences: ^2.0.13
   get_it: ^7.2.0
+  flutter_bloc: ^8.0.1
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +26,8 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   mocktail: ^0.2.0
   build_runner: ^2.1.7
+  freezed: ^0.14.2
+  freezed_annotation: ^0.14.2
 
 flutter:
   uses-material-design: true
