@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:agua_coach_app/di/injection_module.dart';
 import 'package:agua_coach_app/di/injector.dart';
-import 'package:agua_coach_app/features/domain/usecase/set_subscription_notification_usecase.dart';
+import 'package:agua_coach_app/modules/domain/usecase/set_subscription_notification_usecase.dart';
 
 class UsecaseInjectionModule implements InjectionModule {
   @override

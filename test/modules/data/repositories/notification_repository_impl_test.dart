@@ -1,7 +1,7 @@
 import 'package:agua_coach_app/core/usecase/errors/exceptions.dart';
 import 'package:agua_coach_app/core/usecase/errors/failures.dart';
-import 'package:agua_coach_app/features/data/datasources/notification_datasource.dart';
-import 'package:agua_coach_app/features/data/repositories/notification_repository_impl.dart';
+import 'package:agua_coach_app/modules/data/datasources/notification_datasource.dart';
+import 'package:agua_coach_app/modules/data/repositories/notification_repository_impl.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
