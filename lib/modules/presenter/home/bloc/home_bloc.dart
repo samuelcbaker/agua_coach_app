@@ -21,11 +21,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(showLoading: true));
     final subscribeResult = await getSubscriptionNotificationUsecase(NoParams());
     subscribeResult.fold(
-      (l) {
-        emit(state.copyWith(showLoading: false, failure: l));
+      (left) {
+        emit(state.copyWith(showLoading: false, failure: left));
       },
-      (r) {
-        emit(state.copyWith(showLoading: false, isSubscribe: r));
+      (right) {
+        emit(state.copyWith(showLoading: false, isSubscribe: right));
       },
     );
   }
@@ -37,10 +37,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       SetSubscriptionNotificationParams(subscribe: event.value),
     );
     result.fold(
-      (l) {
-        emit(state.copyWith(showLoading: false, failure: l));
+      (left) {
+        emit(state.copyWith(showLoading: false, failure: left));
       },
-      (r) {
+      (right) {
         emit(state.copyWith(showLoading: false, isSubscribe: event.value));
       },
     );
