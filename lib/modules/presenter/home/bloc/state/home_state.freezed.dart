@@ -17,10 +17,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$HomeStateTearOff {
   const _$HomeStateTearOff();
 
-  Initial initial({bool showLoading = false, bool isSubscribe = false}) {
+  Initial initial(
+      {bool showLoading = false, bool isSubscribe = false, Failure? failure}) {
     return Initial(
       showLoading: showLoading,
       isSubscribe: isSubscribe,
+      failure: failure,
     );
   }
 }
@@ -32,20 +34,25 @@ const $HomeState = _$HomeStateTearOff();
 mixin _$HomeState {
   bool get showLoading => throw _privateConstructorUsedError;
   bool get isSubscribe => throw _privateConstructorUsedError;
+  Failure? get failure => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool showLoading, bool isSubscribe) initial,
+    required TResult Function(
+            bool showLoading, bool isSubscribe, Failure? failure)
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool showLoading, bool isSubscribe)? initial,
+    TResult Function(bool showLoading, bool isSubscribe, Failure? failure)?
+        initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool showLoading, bool isSubscribe)? initial,
+    TResult Function(bool showLoading, bool isSubscribe, Failure? failure)?
+        initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -75,7 +82,7 @@ mixin _$HomeState {
 abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res>;
-  $Res call({bool showLoading, bool isSubscribe});
+  $Res call({bool showLoading, bool isSubscribe, Failure? failure});
 }
 
 /// @nodoc
@@ -90,6 +97,7 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
   $Res call({
     Object? showLoading = freezed,
     Object? isSubscribe = freezed,
+    Object? failure = freezed,
   }) {
     return _then(_value.copyWith(
       showLoading: showLoading == freezed
@@ -100,6 +108,10 @@ class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
           ? _value.isSubscribe
           : isSubscribe // ignore: cast_nullable_to_non_nullable
               as bool,
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure?,
     ));
   }
 }
@@ -109,7 +121,7 @@ abstract class $InitialCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
   factory $InitialCopyWith(Initial value, $Res Function(Initial) then) =
       _$InitialCopyWithImpl<$Res>;
   @override
-  $Res call({bool showLoading, bool isSubscribe});
+  $Res call({bool showLoading, bool isSubscribe, Failure? failure});
 }
 
 /// @nodoc
@@ -125,6 +137,7 @@ class _$InitialCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
   $Res call({
     Object? showLoading = freezed,
     Object? isSubscribe = freezed,
+    Object? failure = freezed,
   }) {
     return _then(Initial(
       showLoading: showLoading == freezed
@@ -135,6 +148,10 @@ class _$InitialCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
           ? _value.isSubscribe
           : isSubscribe // ignore: cast_nullable_to_non_nullable
               as bool,
+      failure: failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as Failure?,
     ));
   }
 }
@@ -142,7 +159,8 @@ class _$InitialCopyWithImpl<$Res> extends _$HomeStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$Initial implements Initial {
-  const _$Initial({this.showLoading = false, this.isSubscribe = false});
+  const _$Initial(
+      {this.showLoading = false, this.isSubscribe = false, this.failure});
 
   @JsonKey(defaultValue: false)
   @override
@@ -150,10 +168,12 @@ class _$Initial implements Initial {
   @JsonKey(defaultValue: false)
   @override
   final bool isSubscribe;
+  @override
+  final Failure? failure;
 
   @override
   String toString() {
-    return 'HomeState.initial(showLoading: $showLoading, isSubscribe: $isSubscribe)';
+    return 'HomeState.initial(showLoading: $showLoading, isSubscribe: $isSubscribe, failure: $failure)';
   }
 
   @override
@@ -165,14 +185,17 @@ class _$Initial implements Initial {
                     .equals(other.showLoading, showLoading)) &&
             (identical(other.isSubscribe, isSubscribe) ||
                 const DeepCollectionEquality()
-                    .equals(other.isSubscribe, isSubscribe)));
+                    .equals(other.isSubscribe, isSubscribe)) &&
+            (identical(other.failure, failure) ||
+                const DeepCollectionEquality().equals(other.failure, failure)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(showLoading) ^
-      const DeepCollectionEquality().hash(isSubscribe);
+      const DeepCollectionEquality().hash(isSubscribe) ^
+      const DeepCollectionEquality().hash(failure);
 
   @JsonKey(ignore: true)
   @override
@@ -182,27 +205,31 @@ class _$Initial implements Initial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool showLoading, bool isSubscribe) initial,
+    required TResult Function(
+            bool showLoading, bool isSubscribe, Failure? failure)
+        initial,
   }) {
-    return initial(showLoading, isSubscribe);
+    return initial(showLoading, isSubscribe, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool showLoading, bool isSubscribe)? initial,
+    TResult Function(bool showLoading, bool isSubscribe, Failure? failure)?
+        initial,
   }) {
-    return initial?.call(showLoading, isSubscribe);
+    return initial?.call(showLoading, isSubscribe, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool showLoading, bool isSubscribe)? initial,
+    TResult Function(bool showLoading, bool isSubscribe, Failure? failure)?
+        initial,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(showLoading, isSubscribe);
+      return initial(showLoading, isSubscribe, failure);
     }
     return orElse();
   }
@@ -237,12 +264,15 @@ class _$Initial implements Initial {
 }
 
 abstract class Initial implements HomeState {
-  const factory Initial({bool showLoading, bool isSubscribe}) = _$Initial;
+  const factory Initial(
+      {bool showLoading, bool isSubscribe, Failure? failure}) = _$Initial;
 
   @override
   bool get showLoading => throw _privateConstructorUsedError;
   @override
   bool get isSubscribe => throw _privateConstructorUsedError;
+  @override
+  Failure? get failure => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $InitialCopyWith<Initial> get copyWith => throw _privateConstructorUsedError;

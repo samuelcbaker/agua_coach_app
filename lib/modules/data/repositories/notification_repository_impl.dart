@@ -18,4 +18,14 @@ class NotificationRepositoryImpl implements INotificationRepository {
       return Left(SaveOnDbFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> getSubscriptionNotification() async {
+    try {
+      final result = await datasource.getSubscriptionNotification();
+      return Right(result);
+    } on GetOnDbException {
+      return Left(GetOnDbFailure());
+    }
+  }
 }

@@ -11,6 +11,11 @@ final sl = AppInjector.I.get;
 class AppInjectionContainer implements InjectionContainer {
   @override
   Future<void> init({required GetIt sl}) async {
-    sl.registerFactory(() => HomeBloc(setSubscriptionNotificationUsecase: sl()));
+    sl.registerFactory(
+      () => HomeBloc(
+        setSubscriptionNotificationUsecase: sl(),
+        getSubscriptionNotificationUsecase: sl(),
+      ),
+    );
   }
 }

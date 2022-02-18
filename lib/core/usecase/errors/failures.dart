@@ -6,3 +6,8 @@ class SaveOnDbFailure extends Equatable implements Failure {
   @override
   List<Object?> get props => [];
 }
+
+class GetOnDbFailure extends Equatable implements Failure {
+  @override
+  List<Object?> get props => [];
+}

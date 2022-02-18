@@ -19,19 +19,39 @@ void main() {
     datasource = NotificationDatasourceImpl(dbClient: dbClient);
   });
 
-  test('should set subscription notification on db client', () async {
-    when(() => dbClient.setBool(any(), any())).thenAnswer((_) async {});
+  group('#setSubscriptionNotification', () {
+    test('should set subscription notification on db client', () async {
+      when(() => dbClient.setBool(any(), any())).thenAnswer((_) async {});
 
-    await datasource.setSubscriptionNotification(subscribe: true);
+      await datasource.setSubscriptionNotification(subscribe: true);
 
-    verify(() => dbClient.setBool(any(), any())).called(1);
+      verify(() => dbClient.setBool(any(), any())).called(1);
+    });
+
+    test('should throw an SaveOnDbException when occurs error on dbClient', () async {
+      when(() => dbClient.setBool(any(), any())).thenThrow(Exception());
+
+      final result = datasource.setSubscriptionNotification(subscribe: true);
+
+      expect(() => result, throwsA(SaveOnDbException()));
+    });
   });
 
-  test('should throw an SaveOnDbException when occurs error on dbClient', () async {
-    when(() => dbClient.setBool(any(), any())).thenThrow(Exception());
+  group('#getSubscriptionNotification', () {
+    test('should get subscription notification on db client', () async {
+      when(() => dbClient.getBool(any())).thenAnswer((_) async => false);
 
-    final result = datasource.setSubscriptionNotification(subscribe: true);
+      await datasource.getSubscriptionNotification();
 
-    expect(() => result, throwsA(SaveOnDbException()));
+      verify(() => dbClient.getBool(any())).called(1);
+    });
+
+    test('should throw an GetOnDbException when occurs error on dbClient', () async {
+      when(() => dbClient.getBool(any())).thenThrow(Exception());
+
+      final result = datasource.getSubscriptionNotification();
+
+      expect(() => result, throwsA(GetOnDbException()));
+    });
   });
 }

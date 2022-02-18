@@ -46,7 +46,7 @@ void main() {
   );
 
   test(
-    'should return SetSubscriptionNotificationFailure if repository error',
+    'should return SaveOnDbFailure if repository error',
     () async {
       when(() => notificationRepository.setSubscriptionNotification(subscribe: true))
           .thenAnswer((_) async => Left(subscribeFailure));

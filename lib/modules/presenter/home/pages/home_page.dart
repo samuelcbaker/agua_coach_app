@@ -22,10 +22,26 @@ class _HomePageState extends State<HomePage> {
       child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
         return Scaffold(
           body: Center(
-            child: state.showLoading ? CircularProgressIndicator() : Text('Teste de página'),
+            child: _buildBody(context, state),
           ),
         );
       }),
     );
+  }
+
+  _buildBody(BuildContext context, HomeState state) {
+    return state.showLoading
+        ? const CircularProgressIndicator()
+        : Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Deseja receber notificações para beber água?'),
+              Checkbox(
+                  value: state.isSubscribe,
+                  onChanged: (value) {
+                    context.read<HomeBloc>().add(ChangeSubscribeNotificationEvent(value!));
+                  })
+            ],
+          );
   }
 }

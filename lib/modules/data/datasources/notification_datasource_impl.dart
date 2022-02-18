@@ -17,4 +17,13 @@ class NotificationDatasourceImpl implements INotificationDatasource {
       throw SaveOnDbException();
     }
   }
+
+  @override
+  Future<bool> getSubscriptionNotification() async {
+    try {
+      return dbClient.getBool(SUBSCRIBE_NOTIFICATION_KEY);
+    } catch (e) {
+      throw GetOnDbException();
+    }
+  }
 }
