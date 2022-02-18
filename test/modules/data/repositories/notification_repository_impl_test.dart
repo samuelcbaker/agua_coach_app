@@ -23,47 +23,95 @@ void main() {
     return;
   }
 
-  test(
-    'should calls datasource',
-    () async {
-      when(
-        () => datasource.setSubscriptionNotification(subscribe: true),
-      ).thenAnswer(
-        (_) async => mockVoidReturn,
-      );
+  group('#setSubscriptionNotification', () {
+    test(
+      'should calls datasource',
+      () async {
+        when(
+          () => datasource.setSubscriptionNotification(subscribe: true),
+        ).thenAnswer(
+          (_) async => mockVoidReturn,
+        );
 
-      final result = await repository.setSubscriptionNotification(subscribe: true);
+        final result = await repository.setSubscriptionNotification(subscribe: true);
 
-      expect(
-        result,
-        Right<Failure, void>(mockVoidReturn),
-      );
+        expect(
+          result,
+          Right<Failure, void>(mockVoidReturn),
+        );
 
-      verify(
-        () => datasource.setSubscriptionNotification(subscribe: true),
-      ).called(1);
-    },
-  );
+        verify(
+          () => datasource.setSubscriptionNotification(subscribe: true),
+        ).called(1);
+      },
+    );
 
-  test(
-    'should return SaveOnSharedPreferencesFailure when datasource throws a SaveOnSharedPreferencesException',
-    () async {
-      when(
-        () => datasource.setSubscriptionNotification(subscribe: true),
-      ).thenThrow(
-        SaveOnDbException(),
-      );
+    test(
+      'should return SaveOnDbFailure when datasource throws a SaveOnSharedPreferencesException',
+      () async {
+        when(
+          () => datasource.setSubscriptionNotification(subscribe: true),
+        ).thenThrow(
+          SaveOnDbException(),
+        );
 
-      final result = await repository.setSubscriptionNotification(subscribe: true);
+        final result = await repository.setSubscriptionNotification(subscribe: true);
 
-      expect(
-        result,
-        Left<Failure, void>(SaveOnDbFailure()),
-      );
+        expect(
+          result,
+          Left<Failure, void>(SaveOnDbFailure()),
+        );
 
-      verify(
-        () => datasource.setSubscriptionNotification(subscribe: true),
-      ).called(1);
-    },
-  );
+        verify(
+          () => datasource.setSubscriptionNotification(subscribe: true),
+        ).called(1);
+      },
+    );
+  });
+
+  group('#getSubscriptionNotification', () {
+    test(
+      'should calls datasource',
+      () async {
+        when(
+          () => datasource.getSubscriptionNotification(),
+        ).thenAnswer(
+          (_) async => false,
+        );
+
+        final result = await repository.getSubscriptionNotification();
+
+        expect(
+          result,
+          Right<Failure, bool>(false),
+        );
+
+        verify(
+          () => datasource.getSubscriptionNotification(),
+        ).called(1);
+      },
+    );
+
+    test(
+      'should return GetOnDbFailure when datasource throws a GetOnDbException',
+      () async {
+        when(
+          () => datasource.getSubscriptionNotification(),
+        ).thenThrow(
+          GetOnDbException(),
+        );
+
+        final result = await repository.getSubscriptionNotification();
+
+        expect(
+          result,
+          Left<Failure, bool>(GetOnDbFailure()),
+        );
+
+        verify(
+          () => datasource.getSubscriptionNotification(),
+        ).called(1);
+      },
+    );
+  });
 }

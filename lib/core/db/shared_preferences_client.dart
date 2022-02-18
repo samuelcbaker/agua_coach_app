@@ -10,4 +10,9 @@ class SharedPreferencesClient implements IDbClient {
   Future<void> setBool(String key, bool value) async {
     await sharedPreferences.setBool(key, value);
   }
+
+  @override
+  Future<bool> getBool(String key) async {
+    return sharedPreferences.getBool(key) ?? false;
+  }
 }

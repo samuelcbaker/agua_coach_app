@@ -20,6 +20,12 @@ class _$HomeEventTearOff {
   HomeInitEvent init() {
     return const HomeInitEvent();
   }
+
+  ChangeSubscribeNotificationEvent changeSubscribeNotification(bool value) {
+    return ChangeSubscribeNotificationEvent(
+      value,
+    );
+  }
 }
 
 /// @nodoc
@@ -30,32 +36,41 @@ mixin _$HomeEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(bool value) changeSubscribeNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool value)? changeSubscribeNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool value)? changeSubscribeNotification,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HomeInitEvent value) init,
+    required TResult Function(ChangeSubscribeNotificationEvent value)
+        changeSubscribeNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(HomeInitEvent value)? init,
+    TResult Function(ChangeSubscribeNotificationEvent value)?
+        changeSubscribeNotification,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HomeInitEvent value)? init,
+    TResult Function(ChangeSubscribeNotificationEvent value)?
+        changeSubscribeNotification,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -116,6 +131,7 @@ class _$HomeInitEvent implements HomeInitEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function(bool value) changeSubscribeNotification,
   }) {
     return init();
   }
@@ -124,6 +140,7 @@ class _$HomeInitEvent implements HomeInitEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool value)? changeSubscribeNotification,
   }) {
     return init?.call();
   }
@@ -132,6 +149,7 @@ class _$HomeInitEvent implements HomeInitEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function(bool value)? changeSubscribeNotification,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -144,6 +162,8 @@ class _$HomeInitEvent implements HomeInitEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(HomeInitEvent value) init,
+    required TResult Function(ChangeSubscribeNotificationEvent value)
+        changeSubscribeNotification,
   }) {
     return init(this);
   }
@@ -152,6 +172,8 @@ class _$HomeInitEvent implements HomeInitEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(HomeInitEvent value)? init,
+    TResult Function(ChangeSubscribeNotificationEvent value)?
+        changeSubscribeNotification,
   }) {
     return init?.call(this);
   }
@@ -160,6 +182,8 @@ class _$HomeInitEvent implements HomeInitEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HomeInitEvent value)? init,
+    TResult Function(ChangeSubscribeNotificationEvent value)?
+        changeSubscribeNotification,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -171,4 +195,147 @@ class _$HomeInitEvent implements HomeInitEvent {
 
 abstract class HomeInitEvent implements HomeEvent {
   const factory HomeInitEvent() = _$HomeInitEvent;
+}
+
+/// @nodoc
+abstract class $ChangeSubscribeNotificationEventCopyWith<$Res> {
+  factory $ChangeSubscribeNotificationEventCopyWith(
+          ChangeSubscribeNotificationEvent value,
+          $Res Function(ChangeSubscribeNotificationEvent) then) =
+      _$ChangeSubscribeNotificationEventCopyWithImpl<$Res>;
+  $Res call({bool value});
+}
+
+/// @nodoc
+class _$ChangeSubscribeNotificationEventCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res>
+    implements $ChangeSubscribeNotificationEventCopyWith<$Res> {
+  _$ChangeSubscribeNotificationEventCopyWithImpl(
+      ChangeSubscribeNotificationEvent _value,
+      $Res Function(ChangeSubscribeNotificationEvent) _then)
+      : super(_value, (v) => _then(v as ChangeSubscribeNotificationEvent));
+
+  @override
+  ChangeSubscribeNotificationEvent get _value =>
+      super._value as ChangeSubscribeNotificationEvent;
+
+  @override
+  $Res call({
+    Object? value = freezed,
+  }) {
+    return _then(ChangeSubscribeNotificationEvent(
+      value == freezed
+          ? _value.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangeSubscribeNotificationEvent
+    implements ChangeSubscribeNotificationEvent {
+  const _$ChangeSubscribeNotificationEvent(this.value);
+
+  @override
+  final bool value;
+
+  @override
+  String toString() {
+    return 'HomeEvent.changeSubscribeNotification(value: $value)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is ChangeSubscribeNotificationEvent &&
+            (identical(other.value, value) ||
+                const DeepCollectionEquality().equals(other.value, value)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(value);
+
+  @JsonKey(ignore: true)
+  @override
+  $ChangeSubscribeNotificationEventCopyWith<ChangeSubscribeNotificationEvent>
+      get copyWith => _$ChangeSubscribeNotificationEventCopyWithImpl<
+          ChangeSubscribeNotificationEvent>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function(bool value) changeSubscribeNotification,
+  }) {
+    return changeSubscribeNotification(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(bool value)? changeSubscribeNotification,
+  }) {
+    return changeSubscribeNotification?.call(value);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function(bool value)? changeSubscribeNotification,
+    required TResult orElse(),
+  }) {
+    if (changeSubscribeNotification != null) {
+      return changeSubscribeNotification(value);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HomeInitEvent value) init,
+    required TResult Function(ChangeSubscribeNotificationEvent value)
+        changeSubscribeNotification,
+  }) {
+    return changeSubscribeNotification(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(HomeInitEvent value)? init,
+    TResult Function(ChangeSubscribeNotificationEvent value)?
+        changeSubscribeNotification,
+  }) {
+    return changeSubscribeNotification?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HomeInitEvent value)? init,
+    TResult Function(ChangeSubscribeNotificationEvent value)?
+        changeSubscribeNotification,
+    required TResult orElse(),
+  }) {
+    if (changeSubscribeNotification != null) {
+      return changeSubscribeNotification(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChangeSubscribeNotificationEvent implements HomeEvent {
+  const factory ChangeSubscribeNotificationEvent(bool value) =
+      _$ChangeSubscribeNotificationEvent;
+
+  bool get value => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ChangeSubscribeNotificationEventCopyWith<ChangeSubscribeNotificationEvent>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:agua_coach_app/di/injection_module.dart';
 import 'package:agua_coach_app/di/injector.dart';
+import 'package:agua_coach_app/modules/domain/usecase/get_subscription_notification_usecase.dart';
 import 'package:agua_coach_app/modules/domain/usecase/set_subscription_notification_usecase.dart';
 
 class UsecaseInjectionModule implements InjectionModule {
@@ -11,6 +12,8 @@ class UsecaseInjectionModule implements InjectionModule {
     required Injector injector,
     required BuildConfig buildConfig,
   }) {
-    injector.registerFactory(() => SetSubscriptionNotificationUsecase(notificationRepository: injector.get()));
+    injector
+      ..registerFactory(() => SetSubscriptionNotificationUsecase(notificationRepository: injector.get()))
+      ..registerFactory(() => GetSubscriptionNotificationUsecase(notificationRepository: injector.get()));
   }
 }
