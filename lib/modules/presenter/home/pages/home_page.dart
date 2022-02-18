@@ -30,18 +30,35 @@ class _HomePageState extends State<HomePage> {
   }
 
   _buildBody(BuildContext context, HomeState state) {
-    return state.showLoading
-        ? const CircularProgressIndicator()
-        : Column(
+    return state.showLoading ? const CircularProgressIndicator() : _buildContent(context, state);
+  }
+
+  _buildContent(BuildContext context, HomeState state) {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Visibility(
+            visible: state.isSubscribe,
+            child: Image.asset('assets/gifs/water-1.gif'),
+          ),
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text('Deseja receber notificações para beber água?'),
-              Checkbox(
-                  value: state.isSubscribe,
-                  onChanged: (value) {
-                    context.read<HomeBloc>().add(ChangeSubscribeNotificationEvent(value!));
-                  })
+              Switch.adaptive(
+                value: state.isSubscribe,
+                onChanged: (value) => context.read<HomeBloc>().add(ChangeSubscribeNotificationEvent(value)),
+              ),
             ],
-          );
+          ),
+          Visibility(
+            visible: state.isSubscribe,
+            child: Image.asset('assets/gifs/water-2.gif'),
+          ),
+        ],
+      ),
+    );
   }
 }
