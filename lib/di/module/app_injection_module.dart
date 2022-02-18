@@ -12,7 +12,6 @@ class AppInjectionModule implements InjectionModule {
     required BuildConfig buildConfig,
   }) async {
     injector.registerSingleton<BuildConfig>(buildConfig);
-
     final sharedPref = await SharedPreferences.getInstance();
     injector.registerFactory<SharedPreferences>(() => sharedPref);
   }
