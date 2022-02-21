@@ -7,6 +7,7 @@ import 'package:agua_coach_app/modules/presenter/home/bloc/home_bloc.dart';
 import 'package:agua_coach_app/modules/presenter/home/bloc/state/home_state.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -14,18 +15,23 @@ class MockSetSubscriptionNotificationUsecase extends Mock implements SetSubscrip
 
 class MockGetSubscriptionNotificationUsecase extends Mock implements GetSubscriptionNotificationUsecase {}
 
+class MockFlutterLocalNotificationPlugin extends Mock implements FlutterLocalNotificationsPlugin {}
+
 void main() {
   late HomeBloc bloc;
   late SetSubscriptionNotificationUsecase setSubscriptionNotificationUsecase;
   late GetSubscriptionNotificationUsecase getSubscriptionNotificationUsecase;
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   setUp(() {
     setSubscriptionNotificationUsecase = MockSetSubscriptionNotificationUsecase();
     getSubscriptionNotificationUsecase = MockGetSubscriptionNotificationUsecase();
+    flutterLocalNotificationsPlugin = MockFlutterLocalNotificationPlugin();
 
     bloc = HomeBloc(
       setSubscriptionNotificationUsecase: setSubscriptionNotificationUsecase,
       getSubscriptionNotificationUsecase: getSubscriptionNotificationUsecase,
+      flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,
     );
   });
 

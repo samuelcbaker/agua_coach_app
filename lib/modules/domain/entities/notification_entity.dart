@@ -1,20 +1,23 @@
 import 'package:equatable/equatable.dart';
 
 class NotificationEntity extends Equatable {
+  final int id;
   final String title;
-  final String description;
-  final String iconURL;
+  final String body;
+  final DateTime scheduledDateTime;
 
   const NotificationEntity({
+    required this.id,
     required this.title,
-    required this.description,
-    required this.iconURL,
+    required this.body,
+    required this.scheduledDateTime,
   });
 
   @override
   List<Object?> get props => [
+        id,
         title,
-        description,
-        iconURL,
+        body,
+        scheduledDateTime,
       ];
 }

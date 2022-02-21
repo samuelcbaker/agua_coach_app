@@ -9,3 +9,13 @@ class GetOnDbException extends Equatable implements Exception {
   @override
   List<Object?> get props => [];
 }
+
+class StringToDateTimeException extends Equatable implements Exception {
+  @override
+  List<Object?> get props => [];
+}
+
+class DateTimeToStringException extends Equatable implements Exception {
+  @override
+  List<Object?> get props => [];
+}

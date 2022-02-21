@@ -1,5 +1,6 @@
 import 'package:agua_coach_app/di/app_injector.dart';
 import 'package:agua_coach_app/modules/presenter/home/bloc/home_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 
 abstract class InjectionContainer {
@@ -15,6 +16,7 @@ class AppInjectionContainer implements InjectionContainer {
       () => HomeBloc(
         setSubscriptionNotificationUsecase: sl(),
         getSubscriptionNotificationUsecase: sl(),
+        flutterLocalNotificationsPlugin: FlutterLocalNotificationsPlugin(),
       ),
     );
   }
