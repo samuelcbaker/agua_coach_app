@@ -11,3 +11,8 @@ class GetOnDbFailure extends Equatable implements Failure {
   @override
   List<Object?> get props => [];
 }
+
+class GenerateIdFailure extends Equatable implements Failure {
+  @override
+  List<Object?> get props => [];
+}
