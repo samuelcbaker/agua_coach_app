@@ -24,3 +24,8 @@ class GenerateIdException extends Equatable implements Exception {
   @override
   List<Object?> get props => [];
 }
+
+class StartScheduleNotificationException extends Equatable implements Exception {
+  @override
+  List<Object?> get props => [];
+}
