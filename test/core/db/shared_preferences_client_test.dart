@@ -46,5 +46,65 @@ void main() {
       expect(result, true);
       verify(() => sharedPreferences.getBool('key')).called(1);
     });
+
+    test('should return false when share preferences return a null value', () async {
+      when(
+        () => sharedPreferences.getBool(any()),
+      ).thenAnswer(
+        (_) => null,
+      );
+
+      final result = await client.getBool('key');
+
+      expect(result, false);
+      verify(() => sharedPreferences.getBool('key')).called(1);
+    });
+  });
+
+  group('#setInt', () {
+    test('should set int on shared preferences', () async {
+      when(
+        () => sharedPreferences.setInt(
+          any(),
+          any(),
+        ),
+      ).thenAnswer(
+        (_) async => true,
+      );
+
+      await client.setInt('key', 1);
+
+      verify(() => sharedPreferences.setInt('key', 1)).called(1);
+    });
+  });
+
+  group('#getInt', () {
+    test('should return an int value from shared preferences', () async {
+      when(
+        () => sharedPreferences.getInt(
+          any(),
+        ),
+      ).thenAnswer(
+        (_) => 1,
+      );
+
+      final result = await client.getInt('key');
+
+      expect(result, 1);
+      verify(() => sharedPreferences.getInt('key')).called(1);
+    });
+
+    test('should return 0 when share preferences return a null value', () async {
+      when(
+        () => sharedPreferences.getInt(any()),
+      ).thenAnswer(
+        (_) => null,
+      );
+
+      final result = await client.getInt('key');
+
+      expect(result, 0);
+      verify(() => sharedPreferences.getInt('key')).called(1);
+    });
   });
 }

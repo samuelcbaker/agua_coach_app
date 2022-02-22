@@ -19,3 +19,8 @@ class DateTimeToStringException extends Equatable implements Exception {
   @override
   List<Object?> get props => [];
 }
+
+class GenerateIdException extends Equatable implements Exception {
+  @override
+  List<Object?> get props => [];
+}

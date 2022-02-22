@@ -28,4 +28,14 @@ class NotificationRepositoryImpl implements INotificationRepository {
       return Left(GetOnDbFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, int>> generateNotificationId() async {
+    try {
+      final result = await datasource.generateNotificationId();
+      return Right(result);
+    } on GenerateIdException {
+      return Left(GenerateIdFailure());
+    }
+  }
 }

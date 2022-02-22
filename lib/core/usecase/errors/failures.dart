@@ -16,3 +16,8 @@ class GenerateIdFailure extends Equatable implements Failure {
   @override
   List<Object?> get props => [];
 }
+
+class StartScheduleNotificationFailure extends Equatable implements Failure {
+  @override
+  List<Object?> get props => [];
+}
