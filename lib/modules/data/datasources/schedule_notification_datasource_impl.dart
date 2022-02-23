@@ -32,7 +32,6 @@ class ScheduleNotificationDatasourceImpl extends IScheduleNotificationDatasource
 
       return notificationEntity.id;
     } catch (e) {
-      print(e);
       throw StartScheduleNotificationException();
     }
   }

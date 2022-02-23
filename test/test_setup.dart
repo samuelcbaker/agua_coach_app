@@ -1,4 +1,5 @@
 import 'package:agua_coach_app/modules/domain/entities/notification_entity.dart';
+import 'package:agua_coach_app/modules/domain/usecase/start_schedule_notification_usecase.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -29,6 +30,11 @@ void registerFallbackValues() {
     ),
     UILocalNotificationDateInterpretation.absoluteTime,
     DateTimeComponents.time,
+    StartScheduleNotificationParams(
+      title: '',
+      body: '',
+      scheduledDateTime: DateTime(2022, 1, 1, 10),
+    ),
   ];
 
   values.forEach((value) {

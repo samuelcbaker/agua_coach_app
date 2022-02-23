@@ -22,7 +22,12 @@ class StartScheduleNotificationFailure extends Equatable implements Failure {
   List<Object?> get props => [];
 }
 
-class LocalNotificationPermissionRejected extends Equatable implements Failure {
+class RequestLocalNotificationPermissionFailure extends Equatable implements Failure {
+  @override
+  List<Object?> get props => [];
+}
+
+class LocalNotificationPermissionRejectedFailure extends Equatable implements Failure {
   @override
   List<Object?> get props => [];
 }

@@ -16,6 +16,7 @@ class AppInjectionContainer implements InjectionContainer {
         setSubscriptionNotificationUsecase: sl(),
         getSubscriptionNotificationUsecase: sl(),
         startScheduleNotificationUsecase: sl(),
+        requestLocalNotificationPermission: sl(),
       ),
     );
   }
