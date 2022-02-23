@@ -25,21 +25,34 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _handleInitEvent(HomeEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(showLoading: true));
+    emit(state.copyWith(
+      showLoading: true,
+      failure: null,
+    ));
     final subscribeResult = await getSubscriptionNotificationUsecase(NoParams());
     subscribeResult.fold(
       (left) {
-        emit(state.copyWith(showLoading: false, failure: left));
+        emit(state.copyWith(
+          showLoading: false,
+          failure: left,
+        ));
       },
       (right) {
-        emit(state.copyWith(showLoading: false, isSubscribe: right));
+        emit(state.copyWith(
+          showLoading: false,
+          isSubscribe: right,
+          failure: null,
+        ));
       },
     );
   }
 
   Future<void> _handleChangeSubscribeNotificationEvent(
       ChangeSubscribeNotificationEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(showLoading: true));
+    emit(state.copyWith(
+      showLoading: true,
+      failure: null,
+    ));
 
     if (event.value) {
       final resultRequestLocalNotifications = await requestLocalNotificationPermission();
@@ -81,9 +94,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         emit(state.copyWith(
           showLoading: false,
           isSubscribe: event.value,
+          failure: null,
         ));
 
-        event.value ? _startJob() : _stopJob();
+        event.value ? _startJobNotifications() : _stopJob();
       },
     );
   }
@@ -92,7 +106,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     // await flutterLocalNotificationsPlugin.cancelAll();
   }
 
-  _startJob() async {
+  _startJobNotifications() async {
     final now = DateTime.now();
 
     await startScheduleNotificationUsecase(StartScheduleNotificationParams(
