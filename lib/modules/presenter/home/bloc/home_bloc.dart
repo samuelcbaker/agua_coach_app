@@ -123,9 +123,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         'daily scheduled notification body',
         _nextInstanceOfTenAM(),
         const NotificationDetails(
-            // android: AndroidNotificationDetails('daily notification channel id', 'daily notification channel name',
-            //     channelDescription: 'daily notification description'),
-            ),
+          android: AndroidNotificationDetails('daily notification channel id', 'daily notification channel name',
+              channelDescription: 'daily notification description', icon: 'app_icon.png'),
+        ),
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time);
@@ -133,7 +133,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   tz.TZDateTime _nextInstanceOfTenAM() {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, 12, 36);
+    tz.TZDateTime scheduledDate = tz.TZDateTime(tz.local, now.year, now.month, now.day, 9, 8);
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
