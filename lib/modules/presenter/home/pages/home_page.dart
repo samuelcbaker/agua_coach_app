@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return sl<HomeBloc>()..add(HomeInitEvent());
+        return sl<HomeBloc>()..add(const HomeInitEvent());
       },
       child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
         return Scaffold(

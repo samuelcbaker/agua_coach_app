@@ -2,12 +2,12 @@ import 'package:agua_coach_app/core/usecase/errors/failures.dart';
 import 'package:agua_coach_app/core/usecase/usecase.dart';
 import 'package:agua_coach_app/modules/domain/usecase/get_subscription_notification_usecase.dart';
 import 'package:agua_coach_app/modules/domain/usecase/set_subscription_notification_usecase.dart';
+import 'package:agua_coach_app/modules/domain/usecase/start_schedule_notification_usecase.dart';
 import 'package:agua_coach_app/modules/presenter/home/bloc/event/home_event.dart';
 import 'package:agua_coach_app/modules/presenter/home/bloc/home_bloc.dart';
 import 'package:agua_coach_app/modules/presenter/home/bloc/state/home_state.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -15,23 +15,23 @@ class MockSetSubscriptionNotificationUsecase extends Mock implements SetSubscrip
 
 class MockGetSubscriptionNotificationUsecase extends Mock implements GetSubscriptionNotificationUsecase {}
 
-class MockFlutterLocalNotificationPlugin extends Mock implements FlutterLocalNotificationsPlugin {}
+class MockStartScheduleNotificationUsecase extends Mock implements StartScheduleNotificationUsecase {}
 
 void main() {
   late HomeBloc bloc;
   late SetSubscriptionNotificationUsecase setSubscriptionNotificationUsecase;
   late GetSubscriptionNotificationUsecase getSubscriptionNotificationUsecase;
-  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  late StartScheduleNotificationUsecase startScheduleNotificationUsecase;
 
   setUp(() {
     setSubscriptionNotificationUsecase = MockSetSubscriptionNotificationUsecase();
     getSubscriptionNotificationUsecase = MockGetSubscriptionNotificationUsecase();
-    flutterLocalNotificationsPlugin = MockFlutterLocalNotificationPlugin();
+    startScheduleNotificationUsecase = MockStartScheduleNotificationUsecase();
 
     bloc = HomeBloc(
       setSubscriptionNotificationUsecase: setSubscriptionNotificationUsecase,
       getSubscriptionNotificationUsecase: getSubscriptionNotificationUsecase,
-      flutterLocalNotificationsPlugin: flutterLocalNotificationsPlugin,
+      startScheduleNotificationUsecase: startScheduleNotificationUsecase,
     );
   });
 
