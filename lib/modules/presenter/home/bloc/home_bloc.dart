@@ -54,32 +54,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       failure: null,
     ));
 
-    if (event.value) {
-      final resultRequestLocalNotifications = await requestLocalNotificationPermission();
-      bool valuePermission = true;
-
-      resultRequestLocalNotifications.fold(
-        (failure) {
-          emit(state.copyWith(
-            failure: failure,
-            showLoading: false,
-          ));
-          valuePermission = false;
-        },
-        (permission) {
-          valuePermission = permission;
-        },
-      );
-
-      if (!valuePermission) {
-        emit(state.copyWith(
-          failure: LocalNotificationPermissionRejectedFailure(),
-          showLoading: false,
-        ));
-        return;
-      }
-    }
-
     final result = await setSubscriptionNotificationUsecase(
       SetSubscriptionNotificationParams(subscribe: event.value),
     );
@@ -96,35 +70,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           isSubscribe: event.value,
           failure: null,
         ));
-
-        event.value ? _startJobNotifications() : _stopJob();
       },
     );
   }
 
   _stopJob() async {
     // await flutterLocalNotificationsPlugin.cancelAll();
-  }
-
-  _startJobNotifications() async {
-    final now = DateTime.now();
-
-    await startScheduleNotificationUsecase(StartScheduleNotificationParams(
-      title: 'Já bebeu água hoje?',
-      body: 'Aproveite sua manhã com o corpo super hidratado!',
-      scheduledDateTime: DateTime(now.year, now.month, now.day, 10),
-    ));
-
-    await startScheduleNotificationUsecase(StartScheduleNotificationParams(
-      title: 'Já bebeu água hoje?',
-      body: 'Sua tarde será melhor com sua saúde feliz!',
-      scheduledDateTime: DateTime(now.year, now.month, now.day, 15),
-    ));
-
-    await startScheduleNotificationUsecase(StartScheduleNotificationParams(
-      title: 'Já bebeu água hoje?',
-      body: 'De noite também é hora, aproveite!',
-      scheduledDateTime: DateTime(now.year, now.month, now.day, 19),
-    ));
   }
 }
