@@ -1,3 +1,4 @@
+import 'package:agua_coach_app/core/usecase/usecase.dart';
 import 'package:agua_coach_app/modules/domain/entities/notification_entity.dart';
 import 'package:agua_coach_app/modules/domain/usecase/start_schedule_notification_usecase.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -35,6 +36,7 @@ void registerFallbackValues() {
       body: '',
       scheduledDateTime: DateTime(2022, 1, 1, 10),
     ),
+    NoParams(),
   ];
 
   values.forEach((value) {

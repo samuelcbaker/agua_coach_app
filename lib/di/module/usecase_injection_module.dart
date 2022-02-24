@@ -19,6 +19,7 @@ class UsecaseInjectionModule implements InjectionModule {
           notificationRepository: injector.get(),
           startScheduleNotificationUsecase: injector.get(),
           requestLocalNotificationPermission: injector.get(),
+          stopAllScheduledNotificationsUsecase: injector.get(),
         ),
       )
       ..registerFactory(

@@ -3,6 +3,7 @@ import 'package:agua_coach_app/core/usecase/errors/failures.dart';
 import 'package:agua_coach_app/core/usecase/usecase.dart';
 import 'package:agua_coach_app/modules/domain/repositories/notification_repository.dart';
 import 'package:agua_coach_app/modules/domain/usecase/start_schedule_notification_usecase.dart';
+import 'package:agua_coach_app/modules/domain/usecase/stop_all_scheduled_notifications_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
@@ -10,11 +11,13 @@ class SetSubscriptionNotificationUsecase extends Usecase<void, SetSubscriptionNo
   final INotificationRepository notificationRepository;
   final StartScheduleNotificationUsecase startScheduleNotificationUsecase;
   final RequestLocalNotificationPermission requestLocalNotificationPermission;
+  final StopAllScheduledNotificationsUsecase stopAllScheduledNotificationsUsecase;
 
   SetSubscriptionNotificationUsecase({
     required this.notificationRepository,
     required this.startScheduleNotificationUsecase,
     required this.requestLocalNotificationPermission,
+    required this.stopAllScheduledNotificationsUsecase,
   });
 
   @override
@@ -26,23 +29,24 @@ class SetSubscriptionNotificationUsecase extends Usecase<void, SetSubscriptionNo
           return Left(LocalNotificationPermissionRejectedFailure());
         }
       } else {
-        return Left(
-          resultRequestLocalNotifications.swap().getOrElse(
-                () => RequestLocalNotificationPermissionFailure(),
-              ),
-        );
+        return resultRequestLocalNotifications;
       }
 
       final resultScheduleNotifications = await _scheduleAllNotifications();
       if (resultScheduleNotifications.isLeft()) {
-        return Left(
-          resultScheduleNotifications.swap().getOrElse(
-                () => StartScheduleNotificationFailure(),
-              ),
+        await stopAllScheduledNotificationsUsecase(
+          NoParams(),
         );
+        return resultScheduleNotifications;
       }
     } else {
-      //TODO: cancel notification job
+      final resultStopNotifications = await stopAllScheduledNotificationsUsecase(
+        NoParams(),
+      );
+
+      if (resultStopNotifications.isLeft()) {
+        return resultStopNotifications;
+      }
     }
 
     return notificationRepository.setSubscriptionNotification(subscribe: params.subscribe);
@@ -58,11 +62,7 @@ class SetSubscriptionNotificationUsecase extends Usecase<void, SetSubscriptionNo
     ));
 
     if (resultFirstNotification.isLeft()) {
-      return Left(
-        resultFirstNotification.swap().getOrElse(
-              () => StartScheduleNotificationFailure(),
-            ),
-      );
+      return resultFirstNotification;
     }
 
     final resultSecondNotification = await startScheduleNotificationUsecase(StartScheduleNotificationParams(
@@ -72,11 +72,7 @@ class SetSubscriptionNotificationUsecase extends Usecase<void, SetSubscriptionNo
     ));
 
     if (resultSecondNotification.isLeft()) {
-      return Left(
-        resultSecondNotification.swap().getOrElse(
-              () => StartScheduleNotificationFailure(),
-            ),
-      );
+      return resultSecondNotification;
     }
 
     final resultThirdNotification = await startScheduleNotificationUsecase(StartScheduleNotificationParams(
@@ -86,11 +82,7 @@ class SetSubscriptionNotificationUsecase extends Usecase<void, SetSubscriptionNo
     ));
 
     if (resultThirdNotification.isLeft()) {
-      return Left(
-        resultThirdNotification.swap().getOrElse(
-              () => StartScheduleNotificationFailure(),
-            ),
-      );
+      return resultThirdNotification;
     }
 
     return const Right(0);

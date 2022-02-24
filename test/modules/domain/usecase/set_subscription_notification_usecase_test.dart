@@ -3,6 +3,7 @@ import 'package:agua_coach_app/core/usecase/errors/failures.dart';
 import 'package:agua_coach_app/modules/domain/repositories/notification_repository.dart';
 import 'package:agua_coach_app/modules/domain/usecase/set_subscription_notification_usecase.dart';
 import 'package:agua_coach_app/modules/domain/usecase/start_schedule_notification_usecase.dart';
+import 'package:agua_coach_app/modules/domain/usecase/stop_all_scheduled_notifications_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -15,11 +16,14 @@ class MockStartScheduleNotificationUsecase extends Mock implements StartSchedule
 
 class MockRequestLocalNotificationPermission extends Mock implements RequestLocalNotificationPermission {}
 
+class MockStopAllScheduledNotificationsUsecase extends Mock implements StopAllScheduledNotificationsUsecase {}
+
 void main() {
   late SetSubscriptionNotificationUsecase usecase;
   late INotificationRepository notificationRepository;
   late StartScheduleNotificationUsecase startScheduleNotificationUsecase;
   late RequestLocalNotificationPermission requestLocalNotificationPermission;
+  late StopAllScheduledNotificationsUsecase stopAllScheduledNotificationsUsecase;
 
   setUpAll(registerFallbackValues);
 
@@ -27,11 +31,13 @@ void main() {
     notificationRepository = MockNotificationRepository();
     startScheduleNotificationUsecase = MockStartScheduleNotificationUsecase();
     requestLocalNotificationPermission = MockRequestLocalNotificationPermission();
+    stopAllScheduledNotificationsUsecase = MockStopAllScheduledNotificationsUsecase();
 
     usecase = SetSubscriptionNotificationUsecase(
       notificationRepository: notificationRepository,
       startScheduleNotificationUsecase: startScheduleNotificationUsecase,
       requestLocalNotificationPermission: requestLocalNotificationPermission,
+      stopAllScheduledNotificationsUsecase: stopAllScheduledNotificationsUsecase,
     );
   });
 
@@ -171,14 +177,85 @@ void main() {
       (_) async => Left(StartScheduleNotificationFailure()),
     );
 
+    when(
+      () => stopAllScheduledNotificationsUsecase(any()),
+    ).thenAnswer((_) async => Right(mockVoidReturn));
+
     final result = await usecase(mockSetSubscriptionNotificationParams);
 
     expect(
       result,
       Left(StartScheduleNotificationFailure()),
     );
+    verify(
+      () => stopAllScheduledNotificationsUsecase(any()),
+    ).called(1);
     verifyNever(
       () => notificationRepository.setSubscriptionNotification(subscribe: true),
+    );
+  });
+
+  test(
+    'should stop subscribe notification when value is false',
+    () async {
+      when(
+        () => notificationRepository.setSubscriptionNotification(
+          subscribe: any(
+            named: 'subscribe',
+          ),
+        ),
+      ).thenAnswer(
+        (_) async => Right(mockVoidReturn),
+      );
+
+      when(
+        () => stopAllScheduledNotificationsUsecase(any()),
+      ).thenAnswer(
+        (invocation) async => Right(mockVoidReturn),
+      );
+
+      final result = await usecase(
+        const SetSubscriptionNotificationParams(subscribe: false),
+      );
+
+      expect(
+        result,
+        Right(mockVoidReturn),
+      );
+
+      verify(
+        () => notificationRepository.setSubscriptionNotification(subscribe: any(named: 'subscribe')),
+      ).called(1);
+
+      verify(
+        () => stopAllScheduledNotificationsUsecase(any()),
+      ).called(1);
+
+      verifyNever(() => requestLocalNotificationPermission());
+      verifyNever(() => startScheduleNotificationUsecase(any()));
+    },
+  );
+
+  test('should return StopAllScheduledNotificationFailure when an error occurs in stop notifications', () async {
+    when(
+      () => stopAllScheduledNotificationsUsecase(any()),
+    ).thenAnswer(
+      (invocation) async => Left(StopAllScheduledNotificationFailure()),
+    );
+
+    final result = await usecase(
+      const SetSubscriptionNotificationParams(subscribe: false),
+    );
+
+    expect(
+      result,
+      Left(StopAllScheduledNotificationFailure()),
+    );
+
+    verifyNever(
+      () => notificationRepository.setSubscriptionNotification(
+        subscribe: any(named: 'subscribe'),
+      ),
     );
   });
 }
