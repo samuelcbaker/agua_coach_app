@@ -114,4 +114,38 @@ void main() {
       },
     );
   });
+
+  void mockVoidReturn() {}
+
+  group('#stopAllScheduleNotifications', () {
+    test('should stop all scheduled notifications', () async {
+      when(
+        () => flutterLocalNotificationsPlugin.cancelAll(),
+      ).thenAnswer(
+        (_) async {},
+      );
+
+      final result = await datasource.stopAllScheduleNotifications();
+
+      verify(
+        () => flutterLocalNotificationsPlugin.cancelAll(),
+      ).called(1);
+    });
+
+    test(
+      'should return a StopAllScheduledNotificationException when an error occurs in local notification plugin',
+      () {
+        when(
+          () => flutterLocalNotificationsPlugin.cancelAll(),
+        ).thenThrow(
+          Exception(),
+        );
+
+        expect(
+          () => datasource.stopAllScheduleNotifications(),
+          throwsA(StopAllScheduledNotificationException()),
+        );
+      },
+    );
+  });
 }

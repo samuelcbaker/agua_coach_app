@@ -35,4 +35,13 @@ class ScheduleNotificationDatasourceImpl extends IScheduleNotificationDatasource
       throw StartScheduleNotificationException();
     }
   }
+
+  @override
+  Future<void> stopAllScheduleNotifications() {
+    try {
+      return flutterLocalNotificationsPlugin.cancelAll();
+    } catch (e) {
+      throw StopAllScheduledNotificationException();
+    }
+  }
 }

@@ -31,3 +31,8 @@ class LocalNotificationPermissionRejectedFailure extends Equatable implements Fa
   @override
   List<Object?> get props => [];
 }
+
+class StopAllScheduledNotificationFailure extends Equatable implements Failure {
+  @override
+  List<Object?> get props => [];
+}

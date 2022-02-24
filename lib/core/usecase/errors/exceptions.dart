@@ -29,3 +29,8 @@ class StartScheduleNotificationException extends Equatable implements Exception 
   @override
   List<Object?> get props => [];
 }
+
+class StopAllScheduledNotificationException extends Equatable implements Exception {
+  @override
+  List<Object?> get props => [];
+}

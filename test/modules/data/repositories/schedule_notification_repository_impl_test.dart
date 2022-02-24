@@ -61,5 +61,36 @@ void main() {
     });
   });
 
-  group('#stopAllScheduleNotifications', () {});
+  void mockVoidReturn() {}
+
+  group('#stopAllScheduleNotifications', () {
+    test('should stop all scheduled notifications', () async {
+      when(
+        () => datasource.stopAllScheduleNotifications(),
+      ).thenAnswer(
+        (_) async => mockVoidReturn,
+      );
+
+      final result = await repository.stopAllScheduleNotifications();
+
+      expect(result, Right(mockVoidReturn));
+    });
+
+    test(
+        'should return a StopAllScheduledNotificationFailure when occurs StopAllScheduledNotificationException on datasource',
+        () async {
+      when(
+        () => datasource.stopAllScheduleNotifications(),
+      ).thenThrow(
+        StopAllScheduledNotificationException(),
+      );
+
+      final result = await repository.stopAllScheduleNotifications();
+
+      expect(
+        result,
+        Left(StopAllScheduledNotificationFailure()),
+      );
+    });
+  });
 }

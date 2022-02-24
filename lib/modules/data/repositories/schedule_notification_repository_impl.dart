@@ -23,8 +23,12 @@ class ScheduleNotificationRepositoryImpl extends IScheduleNotificationRepository
   }
 
   @override
-  Future<Either<Failure, void>> stopAllScheduleNotifications() {
-    // TODO: implement stopAllScheduleNotifications
-    throw UnimplementedError();
+  Future<Either<Failure, void>> stopAllScheduleNotifications() async {
+    try {
+      final result = await datasource.stopAllScheduleNotifications();
+      return Right(result);
+    } on StopAllScheduledNotificationException {
+      return Left(StopAllScheduledNotificationFailure());
+    }
   }
 }
