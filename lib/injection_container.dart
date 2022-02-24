@@ -15,8 +15,6 @@ class AppInjectionContainer implements InjectionContainer {
       () => HomeBloc(
         setSubscriptionNotificationUsecase: sl(),
         getSubscriptionNotificationUsecase: sl(),
-        startScheduleNotificationUsecase: sl(),
-        requestLocalNotificationPermission: sl(),
       ),
     );
   }

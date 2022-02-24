@@ -1,9 +1,6 @@
-import 'package:agua_coach_app/core/permissions/request_local_notification_permission.dart';
-import 'package:agua_coach_app/core/usecase/errors/failures.dart';
 import 'package:agua_coach_app/core/usecase/usecase.dart';
 import 'package:agua_coach_app/modules/domain/usecase/get_subscription_notification_usecase.dart';
 import 'package:agua_coach_app/modules/domain/usecase/set_subscription_notification_usecase.dart';
-import 'package:agua_coach_app/modules/domain/usecase/start_schedule_notification_usecase.dart';
 import 'package:agua_coach_app/modules/presenter/home/bloc/event/home_event.dart';
 import 'package:agua_coach_app/modules/presenter/home/bloc/state/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,14 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final SetSubscriptionNotificationUsecase setSubscriptionNotificationUsecase;
   final GetSubscriptionNotificationUsecase getSubscriptionNotificationUsecase;
-  final StartScheduleNotificationUsecase startScheduleNotificationUsecase;
-  final RequestLocalNotificationPermission requestLocalNotificationPermission;
 
   HomeBloc({
     required this.setSubscriptionNotificationUsecase,
     required this.getSubscriptionNotificationUsecase,
-    required this.startScheduleNotificationUsecase,
-    required this.requestLocalNotificationPermission,
   }) : super(const HomeState.initial()) {
     on<HomeInitEvent>(_handleInitEvent);
     on<ChangeSubscribeNotificationEvent>(_handleChangeSubscribeNotificationEvent);
@@ -72,9 +65,5 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ));
       },
     );
-  }
-
-  _stopJob() async {
-    // await flutterLocalNotificationsPlugin.cancelAll();
   }
 }

@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
     } else if (failure is RequestLocalNotificationPermissionFailure) {
       message = 'Ops... Ocorreu um erro ao solicitar a permissão de notificação, por favor tente novamente.';
     } else if (failure is LocalNotificationPermissionRejectedFailure) {
-      message = 'Você precisa ativar a permissão de envio de notificações.';
+      message = 'Você precisa ativar a permissão de notificações.';
       action = SnackBarAction(
         label: 'Ativar',
         onPressed: () {

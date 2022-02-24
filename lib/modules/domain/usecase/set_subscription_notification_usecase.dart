@@ -41,6 +41,8 @@ class SetSubscriptionNotificationUsecase extends Usecase<void, SetSubscriptionNo
               ),
         );
       }
+    } else {
+      //TODO: cancel notification job
     }
 
     return notificationRepository.setSubscriptionNotification(subscribe: params.subscribe);
