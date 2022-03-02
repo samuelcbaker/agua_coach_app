@@ -22,7 +22,7 @@ class ScheduleNotificationDatasourceImpl extends IScheduleNotificationDatasource
             '${notificationEntity.id}_channel_id',
             '${notificationEntity.id}_channel_name',
             channelDescription: '${notificationEntity.id}_channel_description',
-            icon: 'app_icon.png',
+            // icon: 'app_icon.png',
           ),
         ),
         androidAllowWhileIdle: true,

@@ -6,6 +6,7 @@ import 'package:agua_coach_app/di/injector.dart';
 import 'package:agua_coach_app/modules/domain/usecase/get_subscription_notification_usecase.dart';
 import 'package:agua_coach_app/modules/domain/usecase/set_subscription_notification_usecase.dart';
 import 'package:agua_coach_app/modules/domain/usecase/start_schedule_notification_usecase.dart';
+import 'package:agua_coach_app/modules/domain/usecase/stop_all_scheduled_notifications_usecase.dart';
 
 class UsecaseInjectionModule implements InjectionModule {
   @override
@@ -14,6 +15,11 @@ class UsecaseInjectionModule implements InjectionModule {
     required BuildConfig buildConfig,
   }) {
     injector
+      ..registerFactory(
+        () => StopAllScheduledNotificationsUsecase(
+          repository: injector.get(),
+        ),
+      )
       ..registerFactory(
         () => SetSubscriptionNotificationUsecase(
           notificationRepository: injector.get(),
