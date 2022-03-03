@@ -1,0 +1,16 @@
+name: Flutter CI
+
+on: [pull_request]
+
+jobs:
+  run_tests:
+    name: Flutter Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    container:
+      image: cirrusci/flutter:2.10.1
+
+    steps:
+      - name: Run tests
+        run: flutter test
