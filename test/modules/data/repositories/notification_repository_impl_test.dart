@@ -2,6 +2,7 @@ import 'package:agua_coach_app/core/usecase/errors/exceptions.dart';
 import 'package:agua_coach_app/core/usecase/errors/failures.dart';
 import 'package:agua_coach_app/modules/data/datasources/notification_datasource.dart';
 import 'package:agua_coach_app/modules/data/repositories/notification_repository_impl.dart';
+import 'package:agua_coach_app/modules/domain/repositories/notification_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -9,7 +10,7 @@ import 'package:mocktail/mocktail.dart';
 class MockNotificationDatasource extends Mock implements INotificationDatasource {}
 
 void main() {
-  late NotificationRepositoryImpl repository;
+  late INotificationRepository repository;
   late INotificationDatasource datasource;
 
   setUp(() {
@@ -83,7 +84,7 @@ void main() {
 
         expect(
           result,
-          Right<Failure, bool>(false),
+          const Right(false),
         );
 
         verify(
@@ -113,5 +114,29 @@ void main() {
         ).called(1);
       },
     );
+  });
+
+  group('#generateNotificationId', () {
+    test('should return a notification id', () async {
+      when(
+        () => datasource.generateNotificationId(),
+      ).thenAnswer(
+        (_) async => 1,
+      );
+
+      final result = await repository.generateNotificationId();
+
+      expect(result, const Right(1));
+    });
+
+    test('should return a GenerateIdFailure when GenerateIdException occurs in datasource', () async {
+      when(
+        () => datasource.generateNotificationId(),
+      ).thenThrow(GenerateIdException());
+
+      final result = await repository.generateNotificationId();
+
+      expect(result, Left(GenerateIdFailure()));
+    });
   });
 }

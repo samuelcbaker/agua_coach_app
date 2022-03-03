@@ -18,30 +18,51 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<void> _handleInitEvent(HomeEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(showLoading: true));
+    emit(state.copyWith(
+      showLoading: true,
+      failure: null,
+    ));
     final subscribeResult = await getSubscriptionNotificationUsecase(NoParams());
     subscribeResult.fold(
       (left) {
-        emit(state.copyWith(showLoading: false, failure: left));
+        emit(state.copyWith(
+          showLoading: false,
+          failure: left,
+        ));
       },
       (right) {
-        emit(state.copyWith(showLoading: false, isSubscribe: right));
+        emit(state.copyWith(
+          showLoading: false,
+          isSubscribe: right,
+          failure: null,
+        ));
       },
     );
   }
 
   Future<void> _handleChangeSubscribeNotificationEvent(
       ChangeSubscribeNotificationEvent event, Emitter<HomeState> emit) async {
-    emit(state.copyWith(showLoading: true));
+    emit(state.copyWith(
+      showLoading: true,
+      failure: null,
+    ));
+
     final result = await setSubscriptionNotificationUsecase(
       SetSubscriptionNotificationParams(subscribe: event.value),
     );
     result.fold(
       (left) {
-        emit(state.copyWith(showLoading: false, failure: left));
+        emit(state.copyWith(
+          showLoading: false,
+          failure: left,
+        ));
       },
       (right) {
-        emit(state.copyWith(showLoading: false, isSubscribe: event.value));
+        emit(state.copyWith(
+          showLoading: false,
+          isSubscribe: event.value,
+          failure: null,
+        ));
       },
     );
   }

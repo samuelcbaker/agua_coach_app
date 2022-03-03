@@ -10,6 +10,8 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../test_setup.dart';
+
 class MockSetSubscriptionNotificationUsecase extends Mock implements SetSubscriptionNotificationUsecase {}
 
 class MockGetSubscriptionNotificationUsecase extends Mock implements GetSubscriptionNotificationUsecase {}
@@ -18,6 +20,8 @@ void main() {
   late HomeBloc bloc;
   late SetSubscriptionNotificationUsecase setSubscriptionNotificationUsecase;
   late GetSubscriptionNotificationUsecase getSubscriptionNotificationUsecase;
+
+  setUpAll(registerFallbackValues);
 
   setUp(() {
     setSubscriptionNotificationUsecase = MockSetSubscriptionNotificationUsecase();
@@ -29,7 +33,7 @@ void main() {
     );
   });
 
-  group('HomeInitEvent', () {
+  group('#HomeInitEvent', () {
     blocTest(
       'should get subscribe notification value',
       build: () {
@@ -67,7 +71,7 @@ void main() {
     );
   });
 
-  group('ChangeSubscribeNotificationEvent', () {
+  group('#ChangeSubscribeNotificationEvent', () {
     blocTest(
       'should set subscribe notification value',
       build: () {
@@ -76,6 +80,7 @@ void main() {
             )).thenAnswer(
           (_) async => const Right(null),
         );
+
         return bloc;
       },
       act: (_) => bloc.add(const ChangeSubscribeNotificationEvent(true)),
@@ -98,6 +103,7 @@ void main() {
             )).thenAnswer(
           (_) async => Left(SaveOnDbFailure()),
         );
+
         return bloc;
       },
       act: (_) => bloc.add(const ChangeSubscribeNotificationEvent(true)),

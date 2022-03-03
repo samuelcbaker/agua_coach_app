@@ -54,4 +54,53 @@ void main() {
       expect(() => result, throwsA(GetOnDbException()));
     });
   });
+
+  group('#generateNotificationId', () {
+    test('should return new notification id', () async {
+      when(
+        () => dbClient.getInt(any()),
+      ).thenAnswer(
+        (_) async => 1,
+      );
+
+      when(
+        () => dbClient.setInt(any(), any()),
+      ).thenAnswer(
+        (_) async {},
+      );
+
+      final result = await datasource.generateNotificationId();
+
+      expect(result, isNot(1));
+      verify(() => dbClient.setInt(any(), any())).called(1);
+    });
+
+    test('should return GenerateIdException when occurs some error on get int', () {
+      when(
+        () => dbClient.getInt(any()),
+      ).thenThrow(
+        Exception(),
+      );
+
+      final result = datasource.generateNotificationId();
+
+      expect(() => result, throwsA(GenerateIdException()));
+    });
+
+    test('should return GenerateIdException when occurs some error on set int', () {
+      when(
+        () => dbClient.getInt(any()),
+      ).thenAnswer(
+        (_) async => 1,
+      );
+
+      when(
+        () => dbClient.setInt(any(), any()),
+      ).thenThrow(Exception());
+
+      final result = datasource.generateNotificationId();
+
+      expect(() => result, throwsA(GenerateIdException()));
+    });
+  });
 }

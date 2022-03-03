@@ -1,9 +1,9 @@
-import 'package:agua_coach_app/app.dart';
 import 'package:agua_coach_app/di/app_component.dart';
 import 'package:agua_coach_app/env/production_build_config.dart';
 import 'package:agua_coach_app/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'main.dart' as app;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,5 +18,5 @@ void main() async {
 
   await Future.wait(injectors.map((injector) async => {await injector.init(sl: sl)}));
 
-  runApp(const WaterApp());
+  return app.start();
 }
